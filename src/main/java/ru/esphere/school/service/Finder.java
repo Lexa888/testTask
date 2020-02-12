@@ -52,4 +52,21 @@ public class Finder {
                 .map(Member::getName))
                 .collect(Collectors.toSet());
     }
+
+    /**
+     * Поиск групп людей определенного возраста.
+     *
+     * @param groups    группы
+     * @param minAge минимальный возраст для поиска
+     * @param maxAge максимальный возраст для поиска
+     * @return список имен групп из списка групп в диапазоне возраста minAge и maxAge
+     */
+    public Set<String> findRangeYearsMembers(List<MembersGroup> groups, int minAge, int maxAge) {
+        return groups.stream()
+                .flatMap(x -> x.getMembers().stream()
+                .filter(member -> member.getAge() != null && member.getAge() > minAge && member.getAge() < maxAge)
+                .map(Member::getName))
+                .collect(Collectors.toSet());
+    }
+
 }
