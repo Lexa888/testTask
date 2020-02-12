@@ -37,4 +37,19 @@ public class Finder {
                         .map(Member::getName))
                 .collect(Collectors.toSet());
     }
+
+    /**
+     * Поиск групп людей по имени или его части.
+     *
+     * @param groups    группы
+     * @param targetName имя или часть имени для поиска
+     * @return список имен групп из списка групп совпавшим или частично совпавшим с targetName
+     */
+    public Set<String> findMembersByName(List<MembersGroup> groups, String targetName) {
+        return groups.stream()
+                .flatMap(x -> x.getMembers().stream()
+                .filter(member -> member.getName() != null && member.getName().toLowerCase().contains(targetName))
+                .map(Member::getName))
+                .collect(Collectors.toSet());
+    }
 }

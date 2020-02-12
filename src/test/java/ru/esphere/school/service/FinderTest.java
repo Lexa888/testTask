@@ -14,6 +14,7 @@ class FinderTest {
     Finder finder;
     Set<String> responseOldMembers;
     Set<String> responseYoungMembers;
+    Set<String> responseMembersByName;
     List<MembersGroup> membersGroupList;
 
     @org.junit.jupiter.api.BeforeEach
@@ -22,7 +23,7 @@ class FinderTest {
         Member pavel = new Member("Pavel", 22);
         Member valera = new Member("Valera", 28);
         Member danila = new Member("Danila", 21);
-        Member kirill = new Member("Kirill", null);
+        Member kirill = new Member(null, null);
         List<Member> members1 = new ArrayList<>();
         List<Member> members2 = new ArrayList<>();
         members1.add(aleksey);
@@ -46,6 +47,10 @@ class FinderTest {
         responseYoungMembers = new HashSet<>();
         responseYoungMembers.add(pavel.getName());
         responseYoungMembers.add(danila.getName());
+
+        responseMembersByName = new HashSet<>();
+        responseMembersByName.add(aleksey.getName());
+        responseMembersByName.add(valera.getName());
     }
 
     @org.junit.jupiter.api.Test
@@ -56,5 +61,9 @@ class FinderTest {
     @org.junit.jupiter.api.Test
     void findYoungMembers() {
         assertEquals(responseYoungMembers, finder.findYoungMembers(membersGroupList, 25));
+    }
+    @org.junit.jupiter.api.Test
+    void findMembersByName() {
+        assertEquals(responseMembersByName, finder.findMembersByName(membersGroupList, "al"));
     }
 }
