@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Finder {
     /**
-     * Поиск групп людей старше определенного возраста. *
+     * Поиск групп людей старше определенного возраста.
      *
      * @param groups    группы
      * @param targetAge возраст для поиска
@@ -19,6 +19,21 @@ public class Finder {
         return groups.stream()
                 .flatMap(x -> x.getMembers().stream()
                         .filter(member -> member.getAge() != null && member.getAge() > targetAge)
+                        .map(Member::getName))
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Поиск групп людей моложе определенного возраста.
+     *
+     * @param groups    группы
+     * @param targetAge возраст для поиска
+     * @return список имен групп из списка групп моложе возраста targetAge
+     */
+    public Set<String> findYoungMembers(List<MembersGroup> groups, int targetAge) {
+        return groups.stream()
+                .flatMap(x -> x.getMembers().stream()
+                        .filter(member -> member.getAge() != null && member.getAge() < targetAge)
                         .map(Member::getName))
                 .collect(Collectors.toSet());
     }

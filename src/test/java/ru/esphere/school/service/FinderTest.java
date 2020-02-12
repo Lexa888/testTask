@@ -12,7 +12,8 @@ import java.util.Set;
 
 class FinderTest {
     Finder finder;
-    Set<String> response;
+    Set<String> responseOldMembers;
+    Set<String> responseYoungMembers;
     List<MembersGroup> membersGroupList;
 
     @org.junit.jupiter.api.BeforeEach
@@ -38,13 +39,22 @@ class FinderTest {
 
         finder = new Finder();
 
-        response = new HashSet<>();
-        response.add(aleksey.getName());
-        response.add(valera.getName());
+        responseOldMembers = new HashSet<>();
+        responseOldMembers.add(aleksey.getName());
+        responseOldMembers.add(valera.getName());
+
+        responseYoungMembers = new HashSet<>();
+        responseYoungMembers.add(pavel.getName());
+        responseYoungMembers.add(danila.getName());
     }
 
     @org.junit.jupiter.api.Test
     void findOldMembers() {
-        assertEquals(response, finder.findOldMembers(membersGroupList, 25));
+        assertEquals(responseOldMembers, finder.findOldMembers(membersGroupList, 25));
+    }
+
+    @org.junit.jupiter.api.Test
+    void findYoungMembers() {
+        assertEquals(responseYoungMembers, finder.findYoungMembers(membersGroupList, 25));
     }
 }
